@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Base</title>
+    <!-- Latest compiled and minified CSS -->
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+
+
+          {# Django Home Link / Admin Link / Register Link#}
+          <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'index' %}">CD</a></li>
+
+
+          </ul>
+          {# <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>#}
+
+            {# <li><a class="navbar-link" href="{% url 'special' %}">Special</a></li>#}
+
+          {# Some logic on what to display for last item#}
+          {% if user.is_authenticated %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+              <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
+          </ul>
+
+          {% else %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+            <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
+          </ul>
+          {% endif %}
+
+
+      </div>
+    </nav>
+    <div class="container">
+    {% block body_block %}
+    {% endblock %}
+    </div>
+
+
+  </body>
+</html>
