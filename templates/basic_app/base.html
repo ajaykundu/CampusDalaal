@@ -29,12 +29,14 @@
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
-              <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
+
           </ul>
 
           {% else %}
           <ul class="nav navbar-nav navbar-right">
+            {# <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>#}
             <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
             <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
           </ul>

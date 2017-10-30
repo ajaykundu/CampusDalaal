@@ -1,0 +1,8 @@
+{% extends "productapp\product_base.html" %}
+
+    {% block group_content %}
+     <h1>helloworld</h1>
+      {% for ob in object_list %}
+        <h1>{{ ob.productImage1 }}</h1>
+      {% endfor %}
+    {% endblock %}

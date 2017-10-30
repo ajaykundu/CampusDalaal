@@ -19,9 +19,9 @@ class ProductCategoryModel(models.Model):
 
 # this is out product model and related attributes to it.
 class ProductsModel(models.Model):
-    sellerid = models.ForeignKey(User,related_name = 'products',default = 'ajay')
+    user = models.ForeignKey(User,related_name = 'products')
     categoryid = models.ForeignKey(ProductCategoryModel, related_name = 'products')
-    Institution = models.ForeignKey(IntitutionModel,related_name = 'products')
+    Institution = models.ForeignKey(IntitutionModel,related_name = 'products',blank=True)
 
     #  i am not making title unique at here because i will make unique at
     # late point where sellerid,categoryid and title together will unique.
@@ -41,15 +41,10 @@ class ProductsModel(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse(
-            "UserproductPage:allpages",
-            kwargs={
-                "sellerid": self.user.username,
-                "pk": self.pk
-            }
-        )
+        # return reverse("productapp:create",kwargs={"user": self.user.username,"pk": self.pk})
+        return reverse('productapp:create')
 
 
     class Meta:
         ordering = ["-createdTime"]
-        unique_together = ["sellerid", "categoryid",'title']
+        unique_together = ["user", "categoryid",'title']
