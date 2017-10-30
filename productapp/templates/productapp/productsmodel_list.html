@@ -1,13 +1,22 @@
 {% extends "productapp\product_base.html" %}
 
     {% block group_content %}
-     <h1>helloworld</h1>
       {% for ob in object_list %}
         <div class="" >
-          <tr>
-              <a href="{% url 'productapp:single' pk=ob.pk %}"><h2>{{ob.title}}</h2></a>
-                {# <img src="{{ ob.productImage1.url }}" alt="img" class="img-responsive img-rounded">#}
-             </tr>
+                <a href="{% url 'productapp:single' pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
+                <h3>Category : {{ob.categoryid}}</h3>
+                <h3>Description : {{ob.Description}}</h3>
+                <h3>Price : {{ob.prize}}</h3>
+                <img src="{{ ob.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
+                {% if ob.productImage2 %}
+                    <img src="{{ ob.productImage2.url }}" alt=" " class="img-responsive img-rounded"  height="200" width="200">
+                {% endif %}
+                {% if ob.productImage3 %}
+                    <img src="{{ ob.productImage3.url }}" alt=" " class="img-responsive img-rounded"  height="200" width="200">
+                {% endif %}
+                {% if ob.productImage4 %}
+                    <img src="{{ ob.productImage4.url }}" alt=" " class="img-responsive img-rounded"  height="200" width="200">
+                {% endif %}
 
         </div>
       {% endfor %}

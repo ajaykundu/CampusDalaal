@@ -4,4 +4,19 @@
 
     <h1>welcome to single page group</h1>
 
+    <h2>{{ productsmodel.title }}</h2>
+    <h3>Category : {{productsmodel.categoryid}}</h3>
+    <h3>Description : {{productsmodel.Description}}</h3>
+    <h3>Price : {{productsmodel.prize}}</h3>
+    <img src="{{ productsmodel.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
+    {% if productsmodel.productImage2 %}
+        <img src="{{ productsmodel.productImage2.url }}" alt=" " class="img-responsive img-rounded"  height="200" width="200">
+    {% endif %}
+    {% if productsmodel.productImage3 %}
+        <img src="{{ productsmodel.productImage3.url }}" alt=" " class="img-responsive img-rounded"  height="200" width="200">
+    {% endif %}
+    {% if productsmodel.productImage4 %}
+        <img src="{{ productsmodel.productImage4.url }}" alt=" " class="img-responsive img-rounded"  height="200" width="200">
+    {% endif %}
+
     {% endblock %}

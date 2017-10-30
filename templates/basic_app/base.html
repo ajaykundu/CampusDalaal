@@ -19,9 +19,10 @@
           {# Django Home Link / Admin Link / Register Link#}
           <ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="{% url 'index' %}">CD</a></li>
-
-
           </ul>
+
+
+
           {# <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>#}
 
             {# <li><a class="navbar-link" href="{% url 'special' %}">Special</a></li>#}
@@ -42,6 +43,9 @@
           </ul>
           {% endif %}
 
+          <ul  class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'productapp:all_products' %}" class="btn btn-simple">ProductList</a></li>
+          </ul>
 
       </div>
     </nav>
