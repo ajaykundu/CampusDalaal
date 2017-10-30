@@ -42,7 +42,7 @@ class ProductsModel(models.Model):
 
     def get_absolute_url(self):
         # return reverse("productapp:create",kwargs={"user": self.user.username,"pk": self.pk})
-        return reverse('productapp:create')
+        return reverse('index')
 
 
     class Meta:

@@ -1,8 +1,12 @@
 {% extends "productapp\product_base.html" %}
 
     {% block group_content %}
+
+       {# Here i am going to filter all the products according to their Institution #}
       {% for ob in object_list %}
-        <div class="" >
+
+
+        <div class="" style="border:2px solid black;">
                 <a href="{% url 'productapp:single' pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
                 <h3>Category : {{ob.categoryid}}</h3>
                 <h3>Description : {{ob.Description}}</h3>
@@ -19,5 +23,6 @@
                 {% endif %}
 
         </div>
+        <br>
       {% endfor %}
     {% endblock %}
