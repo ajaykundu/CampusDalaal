@@ -7,4 +7,5 @@ app_name = 'productapp'
 urlpatterns = [
     url(r"^$", views.ProductList.as_view(), name="all_products"),
     url(r"^newproduct/$",views.CreateProduct.as_view(), name="create"),
+    url(r"^in/(?P<pk>\d+)/$",views.SingleProduct.as_view(),name="single"),
 ]

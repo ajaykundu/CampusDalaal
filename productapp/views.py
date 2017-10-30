@@ -13,6 +13,8 @@ from basic_app.models import UserProfileInfo
 
 from braces.views import SelectRelatedMixin
 
+class SingleProduct(generic.DetailView):
+    model = ProductsModel
 
 class ProductList(generic.ListView):
     model = ProductsModel
