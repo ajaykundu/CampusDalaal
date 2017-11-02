@@ -28,5 +28,4 @@ urlpatterns = [
     url(r'^basic_app/',include('basic_app.urls')),
     url(r'^productapp/',include('productapp.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

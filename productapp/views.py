@@ -13,6 +13,7 @@ from basic_app.models import UserProfileInfo
 from django.core.exceptions import ObjectDoesNotExist
 from braces.views import SelectRelatedMixin
 
+
 class SingleProduct(generic.DetailView):
     model = ProductsModel
 
@@ -37,3 +38,22 @@ class CreateProduct(LoginRequiredMixin, generic.CreateView):
         self.object.Institution = UserProfileInfo.objects.get(user=self.request.user).NameOfInstitute
         self.object.save()
         return super().form_valid(form)
+
+# class AutoCompleteView(FormView):
+#     def get(self,request,*args,**kwargs):
+#         data = request.GET
+#         username = data.get("term")
+#         if username:
+#             users = User.objects.filter(username__icontain s= username)
+#
+#             results = []
+#             for user in users:
+#                 user_json = {}
+#                 user_json['id'] = user.id
+#                 user_json['label'] = user.username
+#                 user_json['value'] = user.username
+#                 results.append(user_json)
+#             data = json.dumps(results)
+#
+#         mimetype = 'application/json'
+#         return HttpResponse(data, mimetype)
