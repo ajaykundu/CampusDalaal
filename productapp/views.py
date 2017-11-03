@@ -9,9 +9,11 @@ from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from productapp.models import ProductsModel
-from basic_app.models import UserProfileInfo
+from basic_app.models import UserProfileInfo,IntitutionModel
 from django.core.exceptions import ObjectDoesNotExist
 from braces.views import SelectRelatedMixin
+from django.http import HttpResponse
+import json
 
 
 class SingleProduct(generic.DetailView):
@@ -39,21 +41,24 @@ class CreateProduct(LoginRequiredMixin, generic.CreateView):
         self.object.save()
         return super().form_valid(form)
 
-# class AutoCompleteView(FormView):
-#     def get(self,request,*args,**kwargs):
-#         data = request.GET
-#         username = data.get("term")
-#         if username:
-#             users = User.objects.filter(username__icontain s= username)
-#
-#             results = []
-#             for user in users:
-#                 user_json = {}
-#                 user_json['id'] = user.id
-#                 user_json['label'] = user.username
-#                 user_json['value'] = user.username
-#                 results.append(user_json)
-#             data = json.dumps(results)
-#
-#         mimetype = 'application/json'
-#         return HttpResponse(data, mimetype)
+class AutoCompleteView(generic.FormView):
+    def get(self,request,*args,**kwargs):
+        data = request.GET
+        Institutename = data.get('term', '')
+        print(Institutename)
+        users = IntitutionModel.objects.filter(name__icontains=Institutename)
+        if Institutename :
+            users = IntitutionModel.objects.filter(name__icontains=Institutename)
+            print('maa ki chu')
+            results = []
+            for user in users:
+                user_json = {}
+                user_json['id'] = user.pk
+                user_json['label'] = user.name
+                user_json['value'] = user.name
+                results.append(user_json)
+            data = json.dumps(results)
+        else:
+            data = 'fail'
+        mimetype = 'application/json'
+        return HttpResponse(data, mimetype)

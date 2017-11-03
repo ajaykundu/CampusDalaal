@@ -11,6 +11,9 @@
      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
      <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
 
+     {% block Edit_head_for_registration %}
+
+     {% endblock %}
 
   </head>
   <body>
@@ -61,15 +64,15 @@
     </div>
 
 
-
-
     <script type="text/javascript">
-            $(function() {
-          $("#drugs").autocomplete({
-            source: "/api/get_drugs/",
-            minLength: 2,
-          });
-        });
-    </script>
+         $(function() {
+         $("#new-user").autocomplete({
+         source: "/productapp/autocomplete/",
+         minLength: 2,
+         });
+         });
+ </script>
+
+
   </body>
 </html>

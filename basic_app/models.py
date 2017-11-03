@@ -7,6 +7,9 @@ class IntitutionModel(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name"]
+
 
 # Create your models here.
 class UserProfileInfo(models.Model):
