@@ -30,6 +30,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+
+#Restting of password.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#implementing email verification.
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'your gmail email id'
+EMAIL_HOST_PASSWORD = 'your gmail password'
+EMAIL_PORT = 587
 
 # Application definition
 
