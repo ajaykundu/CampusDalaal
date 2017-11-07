@@ -15,7 +15,6 @@ from braces.views import SelectRelatedMixin
 from django.http import HttpResponse
 import json
 
-
 class SingleProduct(generic.DetailView):
     model = ProductsModel
 

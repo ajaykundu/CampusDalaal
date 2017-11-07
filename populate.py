@@ -10,7 +10,7 @@ django.setup()
 import random
 from basic_app.models import IntitutionModel
 
-
+from django.utils.text import slugify
 import pandas as pd
 
 import csv
@@ -28,4 +28,4 @@ for pu in x:
 
 
 for tpq in z:
-    webpg = IntitutionModel.objects.get_or_create(name=tpq)[0]
+    webpg = IntitutionModel.objects.get_or_create(name=tpq,slug = slugify(tpq))[0]

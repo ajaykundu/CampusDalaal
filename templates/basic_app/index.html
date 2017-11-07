@@ -1,4 +1,14 @@
 {% extends "basic_app/base.html" %}
+
+{% block Edit_head_for_registration %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
+
+{% endblock %}
+
 {% block body_block %}
 
 <div class="container">
@@ -12,8 +22,19 @@
     {% endif %}
 
     {# This piece of code is added to implement autosearch #}
-    <input name="user_name"class="form-control "id="new-user">
-    <input type="search" name="" value="search">
+    <select name="item_id" class="js-example-basic-single">
+        <option value="hello">hello</option>
+    {% for entry in items %}
+      <a href="#"></a>  <option value="{{ entry.pk }}">{{ entry.name }}</option>
+    {% endfor %}
+    </select>
+    <form method="POST">
+      {% csrf_token %}
+
+</form>
+
+    {# <input name="user_name"class="form-control "id="new-user"> #}
+    {# <input type="search" name="" value="search"> #}
   </div>
 </div>
 

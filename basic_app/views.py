@@ -18,10 +18,12 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from basic_app.models import IntitutionModel
 
 # Create your views here.
 def index(request):
-    return render(request,'basic_app/index.html')
+    item = IntitutionModel.objects.all()
+    return render(request,'basic_app/index.html',{'items':item})
 
 @login_required
 def special(request):
@@ -141,7 +143,6 @@ def user_login(request):
     else:
         #Nothing has been provided for username or password.
         return render(request, 'basic_app/login.html', {})
-
 
 def activate(request, uidb64, token):
     try:
