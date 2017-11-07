@@ -40,8 +40,8 @@
           {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
+            <li><a href="{% url 'password_change' %}" class="btn btn-simple">Reset Password</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
-
           </ul>
 
           {% else %}

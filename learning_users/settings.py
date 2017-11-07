@@ -38,9 +38,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #implementing email verification.
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'your gmail email id'
-EMAIL_HOST_PASSWORD = 'your gmail password'
+EMAIL_HOST_USER = 'ajaykunduun@gmail.com'
+EMAIL_HOST_PASSWORD = 'ajay37coder'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'ajaykunduun@gmail.com'
+
 
 # Application definition
 

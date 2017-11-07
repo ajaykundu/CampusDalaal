@@ -9,12 +9,10 @@
           {# A more "HTML" way of creating the login form#}
           <label for="username">Username:</label>
           <input type="text" name="username" placeholder="Username">
-
           <label for="password"></label>
           <input type="password" name="password">
-
+          <a href="{% url 'password_reset' %}">Forgot Password</a>
           <input type="submit" name="" value="Login">
-
         </form>
 
     </div>
