@@ -21,14 +21,13 @@ class ProductCategoryModel(models.Model):
 class ProductsModel(models.Model):
     user = models.ForeignKey(User,related_name = 'products')
     categoryid = models.ForeignKey(ProductCategoryModel, related_name = 'products')
-    Institution = models.ForeignKey(IntitutionModel,related_name = 'products',blank=True)
-
+    Institution = models.ForeignKey(IntitutionModel,related_name = 'products',blank=False)
     #  i am not making title unique at here because i will make unique at
     # late point where sellerid,categoryid and title together will unique.
     title = models.CharField(max_length = 512)
     prize = models.DecimalField(max_digits=8, decimal_places=2)
     Description = models.TextField()
-    productImage1 = models.ImageField(upload_to='photos/',blank = True)
+    productImage1 = models.ImageField(upload_to='photos/',blank = False)
     productImage2 = models.ImageField(upload_to = 'photos/',blank=True)
     productImage3 = models.ImageField(upload_to = 'photos/',blank=True)
     productImage4 = models.ImageField(upload_to = 'photos/',blank=True)
