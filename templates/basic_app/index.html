@@ -13,24 +13,19 @@ $(document).ready(function() {
 
 <div class="container">
   <div class="jumbotron">
-
     {% if user.is_authenticated %}
         <h1>Welcome {{ user.username }}!</h1>
     {% else %}
-        <h1>welcome to CD</h1>
-
+        <h1>Search Your College Here</h1>
+        <select name="item_id" class="js-example-basic-single" onchange="location = this.value;">
+            <option value="hello">hello</option>
+        {% for entry in items %}
+          <option value="{% url 'productapp:singlecolg' slug=entry.slug %}">{{ entry.name }}</option>
+        {% endfor %}
+        </select>
     {% endif %}
 
     {# This piece of code is added to implement autosearch #}
-    <select name="item_id" class="js-example-basic-single">
-        <option value="hello">hello</option>
-    {% for entry in items %}
-      <a href="#"></a>  <option value="{{ entry.pk }}">{{ entry.name }}</option>
-    {% endfor %}
-    </select>
-    <form method="POST">
-      {% csrf_token %}
-
 </form>
 
     {# <input name="user_name"class="form-control "id="new-user"> #}

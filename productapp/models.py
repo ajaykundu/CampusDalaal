@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from basic_app.models import IntitutionModel,UserProfileInfo
+from django.utils.text import slugify
 
 # Create your models here.
 from django.contrib.auth import get_user_model
@@ -22,6 +23,7 @@ class ProductsModel(models.Model):
     user = models.ForeignKey(User,related_name = 'products')
     categoryid = models.ForeignKey(ProductCategoryModel, related_name = 'products')
     Institution = models.ForeignKey(IntitutionModel,related_name = 'products',blank=False)
+    Institutionslug=models.SlugField(allow_unicode=True)
     #  i am not making title unique at here because i will make unique at
     # late point where sellerid,categoryid and title together will unique.
     title = models.CharField(max_length = 512)
@@ -39,9 +41,13 @@ class ProductsModel(models.Model):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        self.Institutionslug = slugify(self.Institution)
+        # self.description_html = misaka.html(self.description)
+        super().save(*args, **kwargs)
+
     def get_absolute_url(self):
-        # return reverse("productapp:create",kwargs={"user": self.user.username,"pk": self.pk})
-        return reverse('index')
+        return reverse("productapp:singlecolg", kwargs={"slug": self.Institutionslug})
 
 
     class Meta:

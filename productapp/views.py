@@ -14,9 +14,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from braces.views import SelectRelatedMixin
 from django.http import HttpResponse
 import json
+from django.utils.text import slugify
 
 class SingleProduct(generic.DetailView):
     model = ProductsModel
+
+class SingleColgProduct(generic.ListView):
+    model = ProductsModel
+
+    def get_queryset(self):
+        qs = super(SingleColgProduct, self).get_queryset()
+        return qs.filter(Institutionslug__exact=self.kwargs.get("slug"))
+
 
 class ProductList(generic.ListView):
     model = ProductsModel
