@@ -7,14 +7,21 @@ $(document).ready(function() {
 });
 </script>
 
+<script type="text/javascript">
+function newpage() {
+window.location.replace('{% url 'productapp:singlecolg' slug=instName %}');
+}
+
+</script>
+
 {% endblock %}
 
 {% block body_block %}
 
 <div class="container">
-  <div class="jumbotron">
+  <div >
     {% if user.is_authenticated %}
-        <h1>Welcome {{ user.username }}!</h1>
+         <script>newpage();</script>
     {% else %}
         <h1>Search Your College Here</h1>
         <select name="item_id" class="js-example-basic-single" onchange="location = this.value;">

@@ -15,6 +15,10 @@ from braces.views import SelectRelatedMixin
 from django.http import HttpResponse
 import json
 from django.utils.text import slugify
+import operator
+from django.db.models import Q
+from functools import reduce
+
 
 class SingleProduct(generic.DetailView):
     model = ProductsModel
@@ -23,8 +27,19 @@ class SingleColgProduct(generic.ListView):
     model = ProductsModel
 
     def get_queryset(self):
-        qs = super(SingleColgProduct, self).get_queryset()
-        return qs.filter(Institutionslug__exact=self.kwargs.get("slug"))
+        result  = super(SingleColgProduct, self).get_queryset()
+        result  = result .filter(Institutionslug__exact=self.kwargs.get("slug"))
+        query = self.request.GET.get('q')
+        if query:
+            query_list = query.split()
+            result = result.filter(
+                reduce(operator.and_,
+                       (Q(title__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(Description__icontains=q) for q in query_list))
+            )
+
+        return result
 
 
 class ProductList(generic.ListView):

@@ -18,12 +18,15 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from basic_app.models import IntitutionModel
+from basic_app.models import IntitutionModel,UserProfileInfo
 
 # Create your views here.
 def index(request):
     item = IntitutionModel.objects.all()
-    return render(request,'basic_app/index.html',{'items':item})
+    nameofInst = 'hello'
+    if request.user.is_authenticated() :
+        nameofInst = UserProfileInfo.objects.get(user=request.user).slugInst
+    return render(request,'basic_app/index.html',{'items':item,'instName':nameofInst})
 
 @login_required
 def special(request):
@@ -114,7 +117,6 @@ def register(request):
                            'registered':registered})
 
 def user_login(request):
-
     if request.method == 'POST':
         # First get the username and password supplied
         username = request.POST.get('username')

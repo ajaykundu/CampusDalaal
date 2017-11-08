@@ -6,6 +6,7 @@ class IntitutionModel(models.Model):
     name = models.CharField(primary_key=True,max_length=512)
     slug = models.SlugField(allow_unicode=True, unique=True)
      #it will be show on object field.
+
     def __str__(self):
         return self.name
 
@@ -27,7 +28,13 @@ class UserProfileInfo(models.Model):
     # Create relationship (don't inherit from User!)
     user = models.OneToOneField(User)
     NameOfInstitute = models.ForeignKey(IntitutionModel)
+    slugInst = models.SlugField(allow_unicode=True)
+
 
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
         return self.user.username
+
+    def save(self, *args, **kwargs):
+        self.slugInst = slugify(self.NameOfInstitute)
+        super().save(*args, **kwargs)

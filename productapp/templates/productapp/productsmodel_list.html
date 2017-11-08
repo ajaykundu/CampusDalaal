@@ -2,18 +2,34 @@
 
     {% block group_content %}
 
+    <form id="searchform" action="" method="get" accept-charset="utf-8">
+<input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
+<button class="searchbutton" type="submit">
+<i class="fa fa-search">Search</i>
+</button>
+</form>
+
        {# Here i am going to filter all the products according to their Institution #}
-      {% for ob in object_list %}
+
+        {% if object_list %}
+
+        {% for ob in object_list %}
+          <div class="" style="border:2px solid black;">
+                  <a href="{% url 'productapp:single' slug=ob.Institutionslug pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
+                  <h3>Category : {{ob.categoryid}}</h3>
+                  <h3>Description : {{ob.Description}}</h3>
+                  <h3>Price : {{ob.prize}}</h3>
+                  <img src="{{ ob.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
+
+          </div>
+          <br>
+        {% endfor %}
+
+        {% else %}
+
+        <h1>Please Post add for your college Here By Logging in.</h1>
+
+        {% endif %}
 
 
-        <div class="" style="border:2px solid black;">
-                <a href="{% url 'productapp:single' pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
-                <h3>Category : {{ob.categoryid}}</h3>
-                <h3>Description : {{ob.Description}}</h3>
-                <h3>Price : {{ob.prize}}</h3>
-                <img src="{{ ob.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
-                
-        </div>
-        <br>
-      {% endfor %}
     {% endblock %}
