@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.views import generic
+from django.views.generic import UpdateView
 from productapp.models import ProductsModel
 from basic_app.models import UserProfileInfo,IntitutionModel
 from django.core.exceptions import ObjectDoesNotExist
@@ -18,6 +19,7 @@ from django.utils.text import slugify
 import operator
 from django.db.models import Q
 from functools import reduce
+
 
 
 class SingleProduct(generic.DetailView):
@@ -52,6 +54,15 @@ class ProductList(generic.ListView):
         else:
             return ProductsModel.objects.all()
 
+class List_product_for_profile(generic.ListView):
+    model = ProductsModel
+    template_name = 'productapp/profilepage.html'
+
+    def get_queryset(self):
+        qs = super(List_product_for_profile,self).get_queryset()
+        return qs.filter(user__exact=self.request.user)
+
+
 class CreateProduct(LoginRequiredMixin, generic.CreateView):
     fields = ("categoryid","title",'prize','Description','productImage1','productImage2','productImage3','productImage4')
     model = ProductsModel
@@ -63,6 +74,18 @@ class CreateProduct(LoginRequiredMixin, generic.CreateView):
         self.object.Institution = UserProfileInfo.objects.get(user=self.request.user).NameOfInstitute
         self.object.save()
         return super().form_valid(form)
+
+
+
+class ProductUpdateView(UpdateView):
+    model = ProductsModel
+    fields = ("categoryid","title",'prize','Description','productImage1','productImage2','productImage3','productImage4')
+    template_name = 'productapp/updateProduct.html'
+
+    def get_success_url(self):
+        return reverse('index')
+
+
 
 class AutoCompleteView(generic.FormView):
     def get(self,request,*args,**kwargs):
