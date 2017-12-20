@@ -25,14 +25,14 @@
     {% if object_list %}
 
     {% for ob in object_list %}
-      <a href="{% url 'productapp:updateProduct' pk=ob.pk %}"><button type="button" name="button">Update</button></a>
       <div class="" style="border:2px solid black;">
-              <a href="{% url 'productapp:single' slug=ob.Institutionslug pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
-              <h3>Category : {{ob.categoryid}}</h3>
-              <h3>Description : {{ob.Description}}</h3>
-              <h3>Price :{{ob.prize}}</h3>
-              <img src="{{ ob.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
-            </div>
+        <a href="{% url 'productapp:updateProduct' pk=ob.pk %}"><button type="button" name="button" class="btn btn-simple">Update</button></a>
+        <a href="{% url 'productapp:single' slug=ob.Institutionslug pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
+        <h3>Category : {{ob.categoryid}}</h3>
+        <h3>Description : {{ob.Description}}</h3>
+        <h3>Price :{{ob.prize}}</h3>
+        <img src="{{ ob.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
+      </div>
       <br>
     {% endfor %}
 

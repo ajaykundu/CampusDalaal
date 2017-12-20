@@ -33,7 +33,7 @@ class List_product_for_profile(generic.ListView):
         return qs.filter(user__exact=self.request.user)
 
     def get_success_url(self):
-        return reverse('index')
+        return reverse('profilepage')
 
 # Create your views here.
 def index(request):
