@@ -33,8 +33,6 @@ class UpdateUserInfo(generic.UpdateView):
     def get_success_url(self):
         return reverse('index')
 
-
-
 class List_product_for_profile(generic.ListView):
     model = ProductsModel
     template_name = 'profilepage.html'
