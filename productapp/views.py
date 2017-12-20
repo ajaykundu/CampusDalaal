@@ -20,14 +20,11 @@ import operator
 from django.db.models import Q
 from functools import reduce
 
-
-
 class SingleProduct(generic.DetailView):
     model = ProductsModel
 
 class SingleColgProduct(generic.ListView):
     model = ProductsModel
-
     def get_queryset(self):
         result  = super(SingleColgProduct, self).get_queryset()
         result  = result .filter(Institutionslug__exact=self.kwargs.get("slug"))
@@ -40,10 +37,9 @@ class SingleColgProduct(generic.ListView):
                 reduce(operator.and_,
                        (Q(Description__icontains=q) for q in query_list))
             )
-
         return result
 
-
+#this will generate a product list.
 class ProductList(generic.ListView):
     model = ProductsModel
 
@@ -54,19 +50,13 @@ class ProductList(generic.ListView):
         else:
             return ProductsModel.objects.all()
 
-class List_product_for_profile(generic.ListView):
-    model = ProductsModel
-    template_name = 'productapp/profilepage.html'
-
-    def get_queryset(self):
-        qs = super(List_product_for_profile,self).get_queryset()
-        return qs.filter(user__exact=self.request.user)
 
 
+
+#this class is for creation of product.
 class CreateProduct(LoginRequiredMixin, generic.CreateView):
     fields = ("categoryid","title",'prize','Description','productImage1','productImage2','productImage3','productImage4')
     model = ProductsModel
-
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -75,8 +65,7 @@ class CreateProduct(LoginRequiredMixin, generic.CreateView):
         self.object.save()
         return super().form_valid(form)
 
-
-
+#for the updation of product view.
 class ProductUpdateView(UpdateView):
     model = ProductsModel
     fields = ("categoryid","title",'prize','Description','productImage1','productImage2','productImage3','productImage4')
@@ -85,8 +74,7 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('index')
 
-
-
+#auto completion of Institution name.
 class AutoCompleteView(generic.FormView):
     def get(self,request,*args,**kwargs):
         data = request.GET
@@ -95,7 +83,7 @@ class AutoCompleteView(generic.FormView):
         users = IntitutionModel.objects.filter(name__icontains=Institutename)
         if Institutename :
             users = IntitutionModel.objects.filter(name__icontains=Institutename)
-            print('maa ki chu')
+            print('hello')
             results = []
             for user in users:
                 user_json = {}

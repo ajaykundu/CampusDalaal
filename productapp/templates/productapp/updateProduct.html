@@ -1,5 +1,6 @@
 {% extends "basic_app\base.html" %}
 {% block body_block %}
+<h1>hello world</h1>
 <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.as_p }}

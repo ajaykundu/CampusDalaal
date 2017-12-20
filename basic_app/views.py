@@ -19,6 +19,21 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from basic_app.models import IntitutionModel,UserProfileInfo
+from django.views import generic
+from productapp.models import ProductsModel
+
+
+#this is the list of product which comes under profile of person.
+class List_product_for_profile(generic.ListView):
+    model = ProductsModel
+    template_name = 'profilepage.html'
+
+    def get_queryset(self):
+        qs = super(List_product_for_profile,self).get_queryset()
+        return qs.filter(user__exact=self.request.user)
+
+    def get_success_url(self):
+        return reverse('index')
 
 # Create your views here.
 def index(request):

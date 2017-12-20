@@ -8,6 +8,7 @@ app_name = 'basic_app'
 urlpatterns=[
     url(r'^register/$',views.register,name='register'),
     url(r'^user_login/$',views.user_login,name='user_login'),
+    url(r'^profilepage',views.List_product_for_profile.as_view(),name='profilepage'),
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
 ]
