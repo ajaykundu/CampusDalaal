@@ -24,6 +24,17 @@ from productapp.models import ProductsModel
 
 
 #this is the list of product which comes under profile of person.
+
+class UpdateUserInfo(generic.UpdateView):
+    model = User
+    fields = ('first_name','last_name')
+    template_name = 'UpdateUserInfo.html'
+
+    def get_success_url(self):
+        return reverse('index')
+
+
+
 class List_product_for_profile(generic.ListView):
     model = ProductsModel
     template_name = 'profilepage.html'

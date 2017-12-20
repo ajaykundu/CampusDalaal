@@ -1,24 +1,13 @@
 {% extends "basic_app\base.html" %}
 
 {% block body_block %}
+      {% if user.first_name %}
+     <h1>{{ user.first_name }} {{user.last_name}}</h1>
+     {% else %}
+     <h1>{{user.username}}</h1>
+      {% endif %}
 
-<form id="searchform" action="" method="get" accept-charset="utf-8">
-<input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search">
-<button class="searchbutton" type="submit">
-<i class="fa fa-search">Search</i>
-</button>
-</form>
-
- <form class="" action="" method="get" accept-charset="utf-8" >
-   <select class="" name="pt" type="text">
-    <option value="cycle">cyclel</option>
-    <option value="notes">Notes</option>
-   </select>
-   <button class="searchbutton" type="submit">
-   <i class="fa fa-search">Search</i>
-   </button>
- </form>
-
+     <a href="{% url 'basic_app:updateinfo' pk=user.pk %}"><button type="button" name="button" class="btn btn-simple">Update Info</button></a>
 
    {# Here i am going to filter all the products according to their Institution #}
 
