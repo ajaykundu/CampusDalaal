@@ -42,11 +42,7 @@
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
             <li><a href="{% url 'dialogs' %}" class="btn btn-simple" >Messages</a></li>
-=======
-            {# <li><a href="{% url 'messages:messages_inbox' %}" class="btn btn-simple" >Messages</a></li>#}
->>>>>>> 8517c0a9b5be5883588c94b1aeff8aacf7f4ecc8
             <li><a href="{% url 'basic_app:profilepage' %}" class="btn btn-simple" >Profile Page</a></li>
             <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
             <li><a href="{% url 'password_change' %}" class="btn btn-simple">Reset Password</a></li>
