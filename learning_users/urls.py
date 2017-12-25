@@ -35,6 +35,10 @@ urlpatterns = [
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^basic_app/',include('basic_app.urls')),
     url(r'^productapp/',include('productapp.urls')),
+<<<<<<< HEAD
+=======
+    url(r'^messages/', include('django_messages.urls')),
+>>>>>>> 8517c0a9b5be5883588c94b1aeff8aacf7f4ecc8
     url(r'^logout/$', views.user_logout, name='logout'),
     url('^', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
