@@ -5,7 +5,12 @@
     <div class="" style="border:2px solid black;">
 
 
-      <h2>{{ productsmodel.title }}</h2>
+      {% if productsmodel.user.username != user.username %}
+      <a href="{% url 'dialogs_detail' productsmodel.user.username %}" class="btn btn-primary">Chat with {{ productsmodel.user.username }}</a>
+      {% else %}
+      <a href="{% url 'productapp:updateProduct' pk=productsmodel.pk %}"><button type="button" name="button" class="btn btn-simple">Update</button></a>
+      {% endif %}
+      <h2>{{ productsmodel.title }}</xh2>
       <h3>Category : {{productsmodel.categoryid}}</h3>
       <h3>Description : {{productsmodel.Description}}</h3>
       <h3>Price : {{productsmodel.prize}}</h3>

@@ -9,7 +9,7 @@ from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.views import generic
 from django.views.generic import UpdateView
-from productapp.models import ProductsModel
+from productapp.models import ProductsModel,ProductCategoryModel
 from basic_app.models import UserProfileInfo,IntitutionModel
 from django.core.exceptions import ObjectDoesNotExist
 from braces.views import SelectRelatedMixin
@@ -25,6 +25,7 @@ class SingleProduct(generic.DetailView):
 
 class SingleColgProduct(generic.ListView):
     model = ProductsModel
+
     def get_queryset(self):
         result  = super(SingleColgProduct, self).get_queryset()
         result  = result .filter(Institutionslug__exact=self.kwargs.get("slug"))
@@ -35,9 +36,16 @@ class SingleColgProduct(generic.ListView):
                 reduce(operator.and_,
                        (Q(title__icontains=q) for q in query_list)) |
                 reduce(operator.and_,
-                       (Q(Description__icontains=q) for q in query_list))
+                       (Q(Description__icontains=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(categoryid__exact=q) for q in query_list))
             )
         return result
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['category_list'] = ProductCategoryModel.objects.all()
+        return data
 
 #this will generate a product list.
 class ProductList(generic.ListView):
@@ -49,9 +57,6 @@ class ProductList(generic.ListView):
             return qs.filter(Institution__exact=UserProfileInfo.objects.get(user=self.request.user).NameOfInstitute)
         else:
             return ProductsModel.objects.all()
-
-
-
 
 #this class is for creation of product.
 class CreateProduct(LoginRequiredMixin, generic.CreateView):
