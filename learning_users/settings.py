@@ -30,6 +30,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
+
+
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 #Restting of password.
@@ -57,7 +62,7 @@ INSTALLED_APPS = [
     'basic_app',
     'bootstrap3',
     'productapp',
-    'django_messages',
+    'django_private_chat',
 ]
 
 SITE_ID = 1

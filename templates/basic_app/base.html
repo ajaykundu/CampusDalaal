@@ -3,8 +3,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Base</title>
+    <title>{% block title %}{% endblock %}</title>
     <!-- Latest compiled and minified CSS -->
+    <meta charset="utf-8">
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all">
       <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
       <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -16,6 +19,7 @@
      </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+     {% block css %}{% endblock %}
      {% block Edit_head_for_registration %}
 
      {% endblock %}
@@ -38,6 +42,7 @@
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'dialogs' %}" class="btn btn-simple" >Messages</a></li>
             <li><a href="{% url 'basic_app:profilepage' %}" class="btn btn-simple" >Profile Page</a></li>
             <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
             <li><a href="{% url 'password_change' %}" class="btn btn-simple">Reset Password</a></li>
@@ -54,6 +59,7 @@
       </div>
     </nav>
     <div class="container">
+      {% block content %}{% endblock %}
     {% block body_block %}
     {% endblock %}
     </div>
@@ -67,7 +73,11 @@
          });
          });
  </script>
+ <script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script>
+ <script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
+ <script src="{% static "js/handlebars-v1.3.0.js" %}" type="text/javascript"></script>
 
+  {% block extra_js %}{% endblock %}
 
   </body>
 </html>
