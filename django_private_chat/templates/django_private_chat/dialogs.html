@@ -48,7 +48,7 @@
                     <div id="messages" class="messages">
                         {% for msg in active_dialog.messages.all %}
                             <div class="row">
-                                <p class="{% if msg.sender == request.user %}pull-left{% else %}pull-right{% endif %}">
+                                <p class="{% if msg.sender == request.user %}pull-right{% else %}pull-left{% endif %}">
                                     <span class="username">{{ msg.sender.username }}:</span>
                                     {{ msg.text }}
                                     <span class="timestamp">&ndash; <span
@@ -103,9 +103,9 @@
             function addNewMessage(packet) {
                 var msg_class = "";
                 if (packet['sender_name'] == $("#owner_username").val()) {
-                    msg_class = "pull-left";
-                } else {
                     msg_class = "pull-right";
+                } else {
+                    msg_class = "pull-left";
                 }
                 var msgElem =
                     $('<div class="row">' +

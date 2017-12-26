@@ -12,7 +12,6 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.db.models import Q
 
-
 class DialogListView(LoginRequiredMixin, generic.ListView):
     template_name = 'django_private_chat/dialogs.html'
     model = models.Dialog
