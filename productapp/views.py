@@ -20,6 +20,25 @@ import operator
 from django.db.models import Q
 from functools import reduce
 
+#rest framework imports
+from rest_framework.response import Response
+from rest_framework import status
+from productapp.models import ProductsModel
+from productapp.serializer import ProductSerializer
+from rest_framework import generics
+from rest_framework.views import APIView
+
+
+class ProductSerializerList(generics.ListCreateAPIView):
+    queryset = ProductsModel.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductSerializerDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProductsModel.objects.all()
+    serializer_class = ProductSerializer
+
+
 class SingleProduct(generic.DetailView):
     model = ProductsModel
 

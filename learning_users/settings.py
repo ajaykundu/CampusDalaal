@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     'bootstrap3',
     'productapp',
     'django_private_chat',
+    'rest_framework',
+    # 'productapp.apps.ProductappConfig',
 ]
 
 SITE_ID = 1
