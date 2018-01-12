@@ -6,5 +6,5 @@ from django.contrib.auth.models import User
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductsModel
-        fields = ('user','Institution','categoryid','title', 'prize','Description',
-                        'productImage1','productImage2','productImage3','productImage4','soldFlag')
+        fields = ('id','user','Institution','categoryid','title', 'prize','Description',
+                        'productImage1','productImage2','productImage3','productImage4','soldFlag','createdTime')
