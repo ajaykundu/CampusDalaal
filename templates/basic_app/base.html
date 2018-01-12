@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <meta charset="utf-8">
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" media="all">
+      <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+     </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+     {% block css %}{% endblock %}
+     {% block Edit_head_for_registration %}
+
+     {% endblock %}
+  </head>
+  <body>
+
+
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+
+
+          {# Django Home Link / Admin Link / Register Link#}
+          <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="{% url 'index' %}">CD</a></li>
+          </ul>
+          {# <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>#}
+
+            {# <li><a class="navbar-link" href="{% url 'special' %}">Special</a></li>#}
+
+          {# Some logic on what to display for last item#}
+          {% if user.is_authenticated %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'dialogs' %}" class="btn btn-simple" >Messages</a></li>
+            <li><a href="{% url 'basic_app:profilepage' %}" class="btn btn-simple" >Profile Page</a></li>
+            <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
+            <li><a href="{% url 'password_change' %}" class="btn btn-simple">Reset Password</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+
+          {% else %}
+          <ul class="nav navbar-nav navbar-right">
+            {# <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>#}
+            <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+            <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
+          </ul>
+          {% endif %}
+      </div>
+    </nav>
+    <div class="container">
+      {% block content %}{% endblock %}
+    {% block body_block %}
+    {% endblock %}
+    </div>
+
+
+    <script type="text/javascript">
+         $(function() {
+         $("#new-user").autocomplete({
+         source: "/productapp/autocomplete/",
+         minLength: 2,
+         });
+         });
+ </script>
+ <script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script>
+ <script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
+ <script src="{% static "js/handlebars-v1.3.0.js" %}" type="text/javascript"></script>
+
+  {% block extra_js %}{% endblock %}
+
+  </body>
+</html>

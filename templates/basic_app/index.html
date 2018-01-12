@@ -1,0 +1,43 @@
+{% extends "basic_app/base.html" %}
+
+{% block Edit_head_for_registration %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
+
+<script type="text/javascript">
+function newpage() {
+window.location.replace('{% url 'productapp:singlecolg' slug=instName %}');
+}
+
+</script>
+
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+  <div >
+    {% if user.is_authenticated %}
+         <script>newpage();</script>
+    {% else %}
+        <h1>Search Your College Here</h1>
+        <select name="item_id" class="js-example-basic-single" onchange="location = this.value;">
+            <option value="hello">hello</option>
+        {% for entry in items %}
+          <option value="{% url 'productapp:singlecolg' slug=entry.slug %}">{{ entry.name }}</option>
+        {% endfor %}
+        </select>
+    {% endif %}
+
+    {# This piece of code is added to implement autosearch #}
+</form>
+
+    {# <input name="user_name"class="form-control "id="new-user"> #}
+    {# <input type="search" name="" value="search"> #}
+  </div>
+</div>
+
+{% endblock %}

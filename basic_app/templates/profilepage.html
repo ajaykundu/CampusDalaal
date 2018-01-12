@@ -1,0 +1,33 @@
+{% extends "basic_app\base.html" %}
+
+{% block body_block %}
+      {% if user.first_name %}
+     <h1>{{ user.first_name }} {{user.last_name}}</h1>
+     {% else %}
+     <h1>{{user.username}}</h1>
+      {% endif %}
+
+     <a href="{% url 'basic_app:updateinfo' pk=user.pk %}"><button type="button" name="button" class="btn btn-simple">Update Info</button></a>
+
+   {# Here i am going to filter all the products according to their Institution #}
+
+    {% if object_list %}
+
+    {% for ob in object_list %}
+      <div class="" style="border:2px solid black;">
+        <a href="{% url 'productapp:updateProduct' pk=ob.pk %}"><button type="button" name="button" class="btn btn-simple">Update</button></a>
+        <a href="{% url 'productapp:single' slug=ob.Institutionslug pk=ob.pk %}"><h2>Title : {{ob.title}}</h2></a>
+        <h3>Category : {{ob.categoryid}}</h3>
+        <h3>Description : {{ob.Description}}</h3>
+        <h3>Price :{{ob.prize}}</h3>
+        <img src="{{ ob.productImage1.url }}" alt="noImage" class="img-responsive img-rounded"  height="200" width="200">
+      </div>
+      <br>
+    {% endfor %}
+
+    {% else %}
+
+    <h1>Please Post add for your college Here By Logging in.</h1>
+
+    {% endif %}
+    {% endblock %}
