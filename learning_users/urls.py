@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django_private_chat import urls as django_private_chat_urls
-
+from .views import api_root
 
 
 urlpatterns = [
@@ -37,4 +37,5 @@ urlpatterns = [
     url(r'^',include('productapp.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
     url('^', include('django.contrib.auth.urls')),
+    url(r'^api/$',api_root),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

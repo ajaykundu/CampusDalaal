@@ -23,6 +23,27 @@ from django.views import generic
 from productapp.models import ProductsModel
 
 
+#viewset for user profile model.
+from rest_framework.response import Response
+from rest_framework import status
+from basic_app.models import UserProfileInfo
+from basic_app.serializer import UserSerializer,UserProfileInfoSerializer
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework.decorators import detail_route
+from rest_framework import viewsets
+from django_private_chat.permissions import IsOwnerOrReadOnly
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserInfoViewSet(viewsets.ModelViewSet):
+    queryset = UserProfileInfo.objects.all()
+    serializer_class = UserProfileInfoSerializer
+
+
 #this is the list of product which comes under profile of person.
 
 class UpdateUserInfo(generic.UpdateView):

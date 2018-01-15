@@ -2,7 +2,7 @@
 from django.conf.urls import url
 
 from . import views
-
+app_name = 'django_private_chat'
 
 from rest_framework import renderers
 
