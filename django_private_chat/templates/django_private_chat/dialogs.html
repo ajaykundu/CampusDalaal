@@ -17,12 +17,12 @@
                         <li>
                             {% if dialog.owner == request.user %}
                                 {% with dialog.opponent.username as username %}
-                                    <a href="{% url 'dialogs_detail' username %}" id="user-{{ username }}"
+                                    <a href="{% url 'django_private_chat:dialogs_detail' username %}" id="user-{{ username }}"
                                        class="btn btn-danger">{% trans "Chat with" %} {{ username }}</a>
                                 {% endwith %}
                             {% else %}
                                 {% with dialog.owner.username as username %}
-                                    <a href="{% url 'dialogs_detail' username %}" id="user-{{ username }}"
+                                    <a href="{% url 'django_private_chat:dialogs_detail' username %}" id="user-{{ username }}"
                                        class="btn btn-danger">{% trans "Chat with" %} {{ username }}</a>
                                 {% endwith %}
                             {% endif %}

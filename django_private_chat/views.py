@@ -15,13 +15,17 @@ from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework import status
 from django_private_chat.models import Dialog,Message
-from django_private_chat.serializer import MessageSerializer
+from django_private_chat.serializer import MessageSerializer,DialogSerializer
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework.decorators import detail_route
 from rest_framework import viewsets
 from django_private_chat.permissions import IsOwnerOrReadOnly
+
+class DialogViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Dialog.objects.all()
+    serializer_class = DialogSerializer
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()

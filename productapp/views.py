@@ -24,7 +24,7 @@ from functools import reduce
 from rest_framework.response import Response
 from rest_framework import status
 from productapp.models import ProductsModel
-from productapp.serializer import ProductSerializer
+from productapp.serializer import ProductSerializer,ProductCategoryModelSerializer
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import permissions
@@ -34,10 +34,16 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from productapp.permissions import IsOwnerOrReadOnly
 
+
+class ProductCategoryModelViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ProductCategoryModel.objects.all()
+    serializer_class = ProductCategoryModelSerializer
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = ProductsModel.objects.all()
     serializer_class = ProductSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly)
+
 
 class SingleProduct(generic.DetailView):
     model = ProductsModel

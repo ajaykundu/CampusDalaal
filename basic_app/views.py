@@ -27,7 +27,7 @@ from productapp.models import ProductsModel
 from rest_framework.response import Response
 from rest_framework import status
 from basic_app.models import UserProfileInfo
-from basic_app.serializer import UserSerializer,UserProfileInfoSerializer
+from basic_app.serializer import UserSerializer,UserProfileInfoSerializer,IntitutionModelSerializer
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import permissions
@@ -35,11 +35,16 @@ from rest_framework.decorators import detail_route
 from rest_framework import viewsets
 from django_private_chat.permissions import IsOwnerOrReadOnly
 
-class UserViewSet(viewsets.ModelViewSet):
+
+class IntitutionModelViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = IntitutionModel.objects.all()
+    serializer_class = IntitutionModelSerializer
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class UserInfoViewSet(viewsets.ModelViewSet):
+class UserInfoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = UserProfileInfo.objects.all()
     serializer_class = UserProfileInfoSerializer
 

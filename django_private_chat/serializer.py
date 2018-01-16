@@ -3,7 +3,12 @@ from django_private_chat.models import Dialog , Message
 from django.contrib.auth.models import User
 
 
-class MessageSerializer(serializers.ModelSerializer):
+class MessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Message
-        fields = ('id','dialog','sender','text','created','modified')
+        fields = ('url','id','dialog','sender','text','created','modified')
+
+class DialogSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dialog
+        fields = ('url','owner','opponent')

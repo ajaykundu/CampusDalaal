@@ -20,7 +20,26 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django_private_chat import urls as django_private_chat_urls
-from .views import api_root
+
+
+from rest_framework.routers import DefaultRouter
+from productapp.views import ProductViewSet,ProductCategoryModelViewSet
+from django_private_chat.views import MessageViewSet,DialogViewSet
+from basic_app.views import UserViewSet,UserInfoViewSet,IntitutionModelViewSet
+
+from rest_framework.schemas import get_schema_view
+
+schema_view = get_schema_view(title='Pastebin API')
+
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r'products', ProductViewSet)
+router.register(r'messages', MessageViewSet)
+router.register(r'user', UserViewSet)
+router.register(r'userinfo',UserInfoViewSet)
+router.register(r'institution',IntitutionModelViewSet)
+router.register(r'chatter',DialogViewSet)
+router.register(r'productcategory',ProductCategoryModelViewSet)
 
 
 urlpatterns = [
@@ -37,5 +56,6 @@ urlpatterns = [
     url(r'^',include('productapp.urls')),
     url(r'^logout/$', views.user_logout, name='logout'),
     url('^', include('django.contrib.auth.urls')),
-    url(r'^api/$',api_root),
+    url(r'^api/', include(router.urls)),
+    url(r'^api/auth/', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

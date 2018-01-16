@@ -6,7 +6,7 @@
 
 
       {% if productsmodel.user.username != user.username %}
-      <a href="{% url 'dialogs_detail' productsmodel.user.username %}" class="btn btn-primary">Chat with {{ productsmodel.user.username }}</a>
+      <a href="{% url 'django_private_chat:dialogs_detail' productsmodel.user.username %}" class="btn btn-primary">Chat with {{ productsmodel.user.username }}</a>
       {% else %}
       <a href="{% url 'productapp:updateProduct' pk=productsmodel.pk %}"><button type="button" name="button" class="btn btn-simple">Update</button></a>
       {% endif %}

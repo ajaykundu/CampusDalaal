@@ -42,7 +42,7 @@
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'dialogs' %}" class="btn btn-simple" >Messages</a></li>
+            <li><a href="{% url 'django_private_chat:dialogs' %}" class="btn btn-simple" >Messages</a></li>
             <li><a href="{% url 'basic_app:profilepage' %}" class="btn btn-simple" >Profile Page</a></li>
             <li><a href="{% url 'productapp:create' %}" class="btn btn-simple">Post Add</a></li>
             <li><a href="{% url 'password_change' %}" class="btn btn-simple">Reset Password</a></li>
