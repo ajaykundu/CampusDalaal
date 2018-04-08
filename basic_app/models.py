@@ -26,8 +26,8 @@ class IntitutionModel(models.Model):
 class UserProfileInfo(models.Model):
 
     # Create relationship (don't inherit from User!)
-    user = models.OneToOneField(User)
-    NameOfInstitute = models.ForeignKey(IntitutionModel)
+    user = models.OneToOneField(User,on_delete = True)
+    NameOfInstitute = models.ForeignKey(IntitutionModel,on_delete = True)
     slugInst = models.SlugField(allow_unicode=True)
 
 

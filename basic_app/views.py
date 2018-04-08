@@ -6,7 +6,7 @@ from basic_app.forms import UserForm,UserProfileInfoForm
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -48,7 +48,7 @@ class List_product_for_profile(generic.ListView):
 def index(request):
     item = IntitutionModel.objects.all()
     nameofInst = 'hello'
-    if request.user.is_authenticated() :
+    if request.user.is_authenticated :
         nameofInst = UserProfileInfo.objects.get(user=request.user).slugInst
     return render(request,'basic_app/index.html',{'items':item,'instName':nameofInst})
 

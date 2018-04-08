@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from basic_app.models import IntitutionModel,UserProfileInfo
 from django.utils.text import slugify
@@ -20,9 +20,9 @@ class ProductCategoryModel(models.Model):
 
 # this is out product model and related attributes to it.
 class ProductsModel(models.Model):
-    user = models.ForeignKey(User,related_name = 'products')
-    categoryid = models.ForeignKey(ProductCategoryModel, related_name = 'products')
-    Institution = models.ForeignKey(IntitutionModel,related_name = 'products',blank=False)
+    user = models.ForeignKey(User,related_name = 'products',on_delete = True)
+    categoryid = models.ForeignKey(ProductCategoryModel, related_name = 'products',on_delete = True)
+    Institution = models.ForeignKey(IntitutionModel,related_name = 'products',blank=False,on_delete = True)
     Institutionslug=models.SlugField(allow_unicode=True)
     #  i am not making title unique at here because i will make unique at
     # late point where sellerid,categoryid and title together will unique.
